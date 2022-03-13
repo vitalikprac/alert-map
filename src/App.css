@@ -1,0 +1,8 @@
+#root{
+    height: 100%
+}
+
+img.blue-icon{
+    /* 158 deg for red color */
+    filter: hue-rotate(158deg);
+}
