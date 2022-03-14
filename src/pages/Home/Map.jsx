@@ -1,12 +1,21 @@
+import TimeAgo from 'javascript-time-ago';
+import uk from 'javascript-time-ago/locale/uk.json';
 import L from 'leaflet';
 import React from 'react';
 import { GeoJSON, TileLayer } from 'react-leaflet';
 
 import { getCustomIcon } from '../../components/CustomIcon';
 
+TimeAgo.addDefaultLocale(uk);
+
+const timeAgo = new TimeAgo('en-US');
+const getBeautifyTime = (from, to) => timeAgo.format(from);
+
 const Map = ({ cities }) => {
   const handleEachFeature = (feature, layer, city) => {
-    layer.bindTooltip(city.display_name);
+    const diffTime = getBeautifyTime(city.date, Date.now());
+    const tooltip = `${city.city} ${diffTime}`;
+    layer.bindTooltip(tooltip);
   };
   return (
     <>
@@ -18,12 +27,12 @@ const Map = ({ cities }) => {
       {/* <GeoJSON onEachFeature={handleEachFeature} data={data[0].geojson} /> */}
       {cities.map((city) => (
         <GeoJSON
-          key={city.osm_id}
+          key={city.city}
           style={{
             fillColor: 'red',
             color: 'red',
           }}
-          data={city.geojson}
+          data={city.data?.[0]?.geojson}
           pointToLayer={(feature, latLng) => {
             const icon = getCustomIcon('blue-icon');
             return L.marker(latLng, { icon });
