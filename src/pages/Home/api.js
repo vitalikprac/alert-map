@@ -9,8 +9,9 @@ export const getOpenStreetMapCity = async (cityName) => {
   }
 };
 
-export const getAlerts = async () => {
-  const url = `http://alert-ukraine.eu-4.evennode.com/alert/`;
+export const getAlerts = async (date = Date.now()) => {
+  const url = `http://alert-ukraine.eu-4.evennode.com/alert/${date}`;
+  // const url = `http://localhost:4000/alert/${date}`;
   try {
     const data = await fetch(url);
     return await data.json();

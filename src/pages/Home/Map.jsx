@@ -11,7 +11,7 @@ TimeAgo.addDefaultLocale(uk);
 const timeAgo = new TimeAgo('en-US');
 const getBeautifyTime = (from, to) => timeAgo.format(from);
 
-const Map = ({ cities }) => {
+const Map = ({ cities, loading }) => {
   const handleEachFeature = (feature, layer, city) => {
     const diffTime = getBeautifyTime(city.date, Date.now());
     const tooltip = `${city.city} ${diffTime}`;
@@ -25,23 +25,24 @@ const Map = ({ cities }) => {
       />
 
       {/* <GeoJSON onEachFeature={handleEachFeature} data={data[0].geojson} /> */}
-      {cities.map((city) => (
-        <GeoJSON
-          key={city.city}
-          style={{
-            fillColor: 'red',
-            color: 'red',
-          }}
-          data={city.data?.[0]?.geojson}
-          pointToLayer={(feature, latLng) => {
-            const icon = getCustomIcon('blue-icon');
-            return L.marker(latLng, { icon });
-          }}
-          onEachFeature={(feature, layer) => {
-            handleEachFeature(feature, layer, city);
-          }}
-        />
-      ))}
+      {!loading &&
+        cities.map((city) => (
+          <GeoJSON
+            key={city.city}
+            style={{
+              fillColor: 'red',
+              color: 'red',
+            }}
+            data={city.data?.[0]?.geojson}
+            pointToLayer={(feature, latLng) => {
+              const icon = getCustomIcon('blue-icon');
+              return L.marker(latLng, { icon });
+            }}
+            onEachFeature={(feature, layer) => {
+              handleEachFeature(feature, layer, city);
+            }}
+          />
+        ))}
     </>
   );
 };
