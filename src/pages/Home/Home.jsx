@@ -1,6 +1,7 @@
-import { DatePicker, InputNumber, notification, Popover, Spin } from 'antd';
+import { DatePicker, notification, Popover, Spin } from 'antd';
 import locale from 'antd/es/date-picker/locale/uk_UA';
 import { useEffect, useRef, useState } from 'react';
+import { focusManager, useQuery } from 'react-query';
 
 import { getBeautifyTime } from '../../utils/helpers';
 
@@ -24,6 +25,27 @@ const Home = () => {
   const [datePickerValue, setDatePickerValue] = useState('');
 
   const mapRef = useRef(null);
+
+  useEffect(() => {
+    focusManager.setEventListener(() => {
+      // Listen to visibilitychange and focus
+      const handleFocus = () => {
+        if (isLiveRef.current) {
+          getAlerts(dateTime).then(setCities);
+        }
+      };
+      if (typeof window !== 'undefined' && window.addEventListener) {
+        window.addEventListener('visibilitychange', handleFocus, false);
+        window.addEventListener('focus', handleFocus, false);
+      }
+
+      return () => {
+        // Be sure to unsubscribe if a new handler is set
+        window.removeEventListener('visibilitychange', handleFocus);
+        window.removeEventListener('focus', handleFocus);
+      };
+    });
+  }, []);
 
   useWebSocket({
     onNewData: (newData) => {
@@ -192,12 +214,10 @@ const Home = () => {
                 Telegram{' '}
                 <a href="tg://resolve?domain=vitalikprac">@vitalikprac</a>
               </div>
-              <div>Карта повітряних тривог України</div>
+              <S.FooterTitle>Карта повітряних тривог України</S.FooterTitle>
               <div>
-                Source:{' '}
-                <a href="https://github.com/vitalikprac/alert-map">
-                  https://github.com/vitalikprac/alert-map
-                </a>
+                Github Source:{' '}
+                <a href="https://github.com/vitalikprac/alert-map">*Link*</a>
               </div>
             </div>
 
@@ -212,7 +232,7 @@ const Home = () => {
                 }}
                 value={inputValue}
               />
-              <InputNumber
+              <S.InputNumber
                 min={MIN_HOUR}
                 max={MAX_HOUR}
                 style={{ margin: '0 8px' }}

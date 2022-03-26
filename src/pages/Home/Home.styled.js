@@ -1,4 +1,4 @@
-import { Slider as SliderAntd } from 'antd';
+import { InputNumber as InputNumberAntd, Slider as SliderAntd } from 'antd';
 import { MapContainer as LeafletMapContainer } from 'react-leaflet';
 import styled from 'styled-components';
 import { QuestionCircleOutlined } from '@ant-design/icons';
@@ -29,6 +29,12 @@ export const Footer = styled.div`
   border-right: none;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+`;
+
+export const FooterTitle = styled.div`
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
 
 export const LiveCircle = styled.div`
@@ -72,6 +78,12 @@ export const SliderContainer = styled.div`
   width: 300px;
   @media (max-width: 767px) {
     width: auto;
+  }
+`;
+
+export const InputNumber = styled(InputNumberAntd)`
+  @media (max-width: 767px) {
+    width: 50px;
   }
 `;
 

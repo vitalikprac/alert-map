@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import * as API from './api';
+import { SERVER_URL } from './constants';
 
 export const useAlerts = () => {
   const [citiesLoading, setCitiesLoading] = useState(true);
