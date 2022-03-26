@@ -54,7 +54,7 @@ Map.propTypes = {
   cities: T.arrayOf(
     T.shape({
       city: T.string,
-      data: T.shape({}),
+      data: T.arrayOf(T.shape({})),
     }),
   ),
   loading: T.bool,

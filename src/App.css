@@ -6,3 +6,113 @@ img.blue-icon{
     /* 158 deg for red color */
     filter: hue-rotate(158deg);
 }
+
+body {
+    background: #222831;
+}
+
+
+
+
+
+.video__icon {
+    position: absolute;
+    width: 50px;
+}
+.video__icon .circle--outer {
+    border: 1px solid #e50040;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 5px;
+    position: relative;
+    opacity: .8;
+    -webkit-animation: circle 2s ease-in-out infinite;
+    animation: circle 2s ease-in-out infinite; }
+.video__icon .circle--inner {
+    background: #e50040;
+    left: 15px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    opacity: .8; }
+.video__icon .circle--inner:after {
+    content: '';
+    display: block;
+    border: 2px solid #e50040;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    top: -4px;
+    left: -4px;
+    position: absolute;
+    opacity: .8;
+    -webkit-animation: circle 2s ease-in-out .2s infinite;
+    animation: circle 2s ease-in-out .2s infinite; }
+.video__icon p {
+    color: #000;
+    text-align: center; }
+
+@-webkit-keyframes circle {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1); }
+
+    to {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 0; } }
+
+@keyframes circle {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    to {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        opacity: 0;
+    } }
+
+
+.video__icon_stop {
+    position: absolute;
+    width: 50px;
+}
+.video__icon_stop .circle--outer {
+    border: 1px solid grey;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 5px;
+    position: relative;
+    opacity: .8;
+    animation: none;
+ }
+.video__icon_stop .circle--inner {
+    background: grey;
+    left: 15px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    opacity: .8; }
+.video__icon_stop .circle--inner:after {
+    content: '';
+    display: block;
+    border: 2px solid grey;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    top: -4px;
+    left: -4px;
+    position: absolute;
+    opacity: .8;
+    animation: none }
+.video__icon_stop p {
+    color: #000;
+    text-align: center; }

@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import * as API from './api';
 
 export const useAlerts = () => {
+  const [citiesLoading, setCitiesLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+  const citiesRef = useRef(null);
+
+  useEffect(() => {
+    import('../../resources/cities.json').then((data) => {
+      citiesRef.current = data.default;
+      setCitiesLoading(false);
+    });
+  }, []);
 
   const getAlerts = async (dateTime) => {
     setLoading(true);
@@ -12,5 +21,5 @@ export const useAlerts = () => {
     return newCities;
   };
 
-  return { getAlerts, loading };
+  return { getAlerts, loading, citiesLoading, citiesRef };
 };
