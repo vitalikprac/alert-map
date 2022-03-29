@@ -31,7 +31,7 @@ const Home = () => {
       // Listen to visibilitychange and focus
       const handleFocus = () => {
         if (isLiveRef.current) {
-          getAlerts(dateTime).then(setCities);
+          getAlerts(Date.now()).then(setCities);
         }
       };
       if (typeof window !== 'undefined' && window.addEventListener) {
